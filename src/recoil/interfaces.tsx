@@ -1,8 +1,12 @@
-export interface IArticleState {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  updated: string;
-  categories: string;
+export interface INews {
+  id: string;
+  type: string;
+  sectionId: string;
+  sectionName: string;
+  webPublicationDate: string;
+  webTitle: string;
+  webUrl: string;
+  apiUrl: string;
+  pillarId: string;
+  pillarName: string;
 }

@@ -1,18 +1,13 @@
 import React from "react";
 
+const Logo = () => <img src="/assets/Logo_White.png" alt="logo" width={142} />;
+
 const Header = () => {
   return (
     <header>
       <div className="toolbar">
-        <div
-          style={{
-            position: "relative",
-            display: "flex",
-            alignItems: "flex-start",
-            // WebkitAlignContent: "center",
-          }}
-        >
-          Header
+        <div id="logo">
+          <Logo />
         </div>
       </div>
     </header>

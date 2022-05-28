@@ -1,13 +1,7 @@
 import { atom } from "recoil";
-// import { articles } from "src/json/data";
 
-const selectedMenu = atom({
-  key: "selectedMenu",
-  default: "news",
-});
-
-const articlesListState = atom({
-  key: "articlesListState",
+const newsListState = atom({
+  key: "newsListState",
   default: [],
 });
 
@@ -16,4 +10,14 @@ const textState = atom({
   default: "",
 });
 
-export { selectedMenu, articlesListState, textState };
+const orderByState = atom({
+  key: "orderByState",
+  default: "newest",
+});
+
+const loaderState = atom({
+  key: "loaderState",
+  default: false,
+});
+
+export { newsListState, textState, orderByState, loaderState };

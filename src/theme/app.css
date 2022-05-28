@@ -1,0 +1,251 @@
+* {
+  box-sizing: border-box;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+  direction: ltr;
+  unicode-bidi: isolate;
+  box-sizing: inherit;
+  margin: 0px;
+}
+
+header {
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  position: fixed;
+  z-index: 1100;
+  top: 0px;
+  left: auto;
+  right: 0px;
+  background-color: #09357B;
+  color: rgb(255, 255, 255);
+}
+
+.toolbar {
+  box-sizing: inherit;
+  position: relative;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  min-height: 100px;
+}
+
+#logo {
+  color: rgb(255, 255, 255);
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  left: 10%;
+}
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  box-sizing: border-box;
+  margin-right: auto;
+  display: block;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.content {
+  box-sizing: inherit;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.sectionTop {
+  display: grid;
+  grid-template-columns: 1fr 25% 25%;
+  grid-template-rows: 150px 150px 200px;
+  gap: 16px;
+} 
+
+.webTitle {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 29px;
+  letter-spacing: 0.07px;
+  text-align: left;
+}
+
+.item {
+  background-color: #0D47A1;
+  padding: 32px 16px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute; 
+  bottom: 0; 
+  background: rgba(9, 53, 123, 0.9);
+  color: #f1f1f1; 
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  font-size: 20px;
+  padding: 16px;
+  height: 200px;
+}
+
+.overlay2 {
+  position: absolute; 
+  bottom: 0; 
+  background: rgba(9, 53, 123, 0.9);
+  color: #f1f1f1; 
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  font-size: 20px;
+  padding: 16px;
+  height: 140px;
+}
+
+.item .overlay2 {
+  opacity: 1;
+}
+
+.item .overlay {
+  opacity: 1;
+}
+
+.item-1 {
+  grid-row: 1 / 4;
+}
+
+.item-2 {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+}
+
+.item-3 {
+  grid-column: 3 / 3;
+  grid-row: 1 / 3;
+}
+
+.item-4 {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+
+.item-5 {
+  grid-column: 3 / 3;
+  grid-row: 3 / 4;
+}
+
+.secondTop {
+  margin: 16px auto;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+
+@media only screen and (max-width: 768px){
+
+  .container {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .sectionTop {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 300px 300px 300px 300px 300px;
+  } 
+
+  .secondTop {
+    grid-template-rows: 300px 300px 300px;
+  }
+
+  .overlay {
+    height: 140px;
+  }
+
+  .item-1 {
+    grid-column: 1 / 5;
+    grid-row: 1 / 2;
+  }
+  .item-2 {
+    grid-column: 1 / 5;
+    grid-row: 2 / 2;
+  }
+  .item-3 {
+    grid-column: 1 / 5;
+    grid-row: 3 / 4;
+  }
+
+  .item-4 {
+    grid-column: 1 / 5;
+    grid-row: 4 / 5;
+  }
+
+  .item-5 {
+    grid-column: 1 / 5;
+    grid-row: 5 / 5;
+  }
+}
+
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 2;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #09357B;
+  width: 88px;
+  height: 88px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}

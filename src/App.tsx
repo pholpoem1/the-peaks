@@ -1,4 +1,4 @@
-import "./theme/app.scss";
+import "./theme/app.css";
 
 import React from "react";
 import { useRoutes } from "react-router-dom";

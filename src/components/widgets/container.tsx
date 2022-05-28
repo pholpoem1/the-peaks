@@ -5,7 +5,11 @@ interface IContainer {
 }
 
 const Container = (props: IContainer) => {
-  return <div style={{ width: "100%", height: "100%" }}>{props.children}</div>;
+  return (
+    <div className="container">
+      <div className="content">{props.children}</div>
+    </div>
+  );
 };
 
 export default Container;
