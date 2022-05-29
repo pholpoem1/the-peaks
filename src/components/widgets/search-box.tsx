@@ -2,7 +2,7 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import { textState } from "src/recoil/atom";
 
-const SearchBox = () => {
+const SearchBox = (props: { onSubmit: Function }) => {
   const [text, setText] = useRecoilState(textState);
 
   return (
@@ -14,6 +14,11 @@ const SearchBox = () => {
         placeholder="Search all news"
         onChange={(e) => {
           setText(e.target.value);
+        }}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            props.onSubmit();
+          }
         }}
       />
     </div>

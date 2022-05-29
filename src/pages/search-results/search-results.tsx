@@ -1,15 +1,15 @@
 import axios from "axios";
-import React, { useCallback, useEffect } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import React, { useCallback } from "react";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { public_const } from "src/api/constant";
 import Layout from "src/components/layout";
-import SectionNews from "src/components/section-news";
 import SectionTitle from "src/components/section-title";
+import ImageArticle from "src/components/widgets/image-article";
 import { loaderState, newsListState, textState } from "src/recoil/atom";
-import SectionTop from "../../components/section-top";
+import { INews } from "src/recoil/interfaces";
 
-const Home = () => {
-  const setNewsList = useSetRecoilState(newsListState);
+const SearchResults = () => {
+  const [newsList, setNewsList] = useRecoilState(newsListState);
   const query = useRecoilValue(textState);
   const setIsOpen = useSetRecoilState(loaderState);
 
@@ -42,20 +42,36 @@ const Home = () => {
         });
     },
     // eslint-disable-next-line
-    [setNewsList, setIsOpen]
+    [setIsOpen]
   );
-
-  useEffect(() => {
-    getNewsArticle(undefined);
-  }, [getNewsArticle]);
 
   return (
     <Layout>
-      <SectionTitle getNewsArticle={getNewsArticle} title={"top stories"} />
-      <SectionTop />
-      <SectionNews />
+      <SectionTitle getNewsArticle={getNewsArticle} title={"search results"} />
+      <div className="secondTop">
+        {newsList.length > 0 ? (
+          newsList.map((item: INews, index: number) => {
+            return (
+              <div
+                className="item"
+                key={index}
+                onClick={() => {
+                  getNewsArticle(item.apiUrl);
+                }}
+              >
+                <ImageArticle />
+                <div className="overlay2">
+                  <span className="webTitle">{item.webTitle}</span>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <h3>Not found data...</h3>
+        )}
+      </div>
     </Layout>
   );
 };
 
-export default Home;
+export default SearchResults;

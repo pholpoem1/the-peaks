@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { orderByState } from "src/recoil/atom";
 import ButtonBookmark from "./widgets/button-bookmark";
 
-const SectionTitle = (props: { getNewsArticle: Function }) => {
+const SectionTitle = (props: { getNewsArticle: Function; title: string }) => {
   const [orderBy, setOrderBy] = useRecoilState(orderByState);
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ const SectionTitle = (props: { getNewsArticle: Function }) => {
 
   return (
     <div className="title">
-      <h1>Top stories</h1>
+      <h1>{props.title}</h1>
       <div className="sectionTitle">
         <div>
           <ButtonBookmark onClick={onClickView} />
