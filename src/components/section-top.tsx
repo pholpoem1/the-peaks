@@ -1,37 +1,13 @@
-import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { public_const } from "src/api/constant";
-import { loaderState, newsListState } from "src/recoil/atom";
+import { useRecoilValue } from "recoil";
+import { newsListState } from "src/recoil/atom";
 import { INews } from "src/recoil/interfaces";
 import ImageArticle from "./widgets/image-article";
 
 const SectionTop = () => {
   const newsList = useRecoilValue(newsListState);
-  const setIsOpen = useSetRecoilState(loaderState);
   const navigate = useNavigate();
-
-  const getNewsArticle = (apiUrl: string) => {
-    setIsOpen(true);
-
-    axios
-      .get(`${apiUrl}?api-key=${public_const.apiKey}`)
-      .then((res: { data: any }) => {
-        // handle success
-        const { response } = res.data;
-        console.log("response :>> ", response.content);
-        // setNewsList(results);
-        setTimeout(() => {
-          setIsOpen(false);
-        }, 500);
-      })
-      .catch((error: any) => {
-        // handle error
-        setIsOpen(false);
-        console.log(error);
-      });
-  };
 
   const onClickContent = (id: string) => {
     navigate(`/content?id=${id}`);
@@ -47,7 +23,6 @@ const SectionTop = () => {
                   className={`item item-${index + 1}`}
                   key={index}
                   onClick={() => {
-                    // getNewsArticle(item.apiUrl);
                     onClickContent(item.id);
                   }}
                 >
@@ -72,7 +47,7 @@ const SectionTop = () => {
                   className="item"
                   key={index}
                   onClick={() => {
-                    getNewsArticle(item.apiUrl);
+                    onClickContent(item.id);
                   }}
                 >
                   <ImageArticle />

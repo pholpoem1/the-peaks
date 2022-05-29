@@ -1,17 +1,23 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { orderByState } from "src/recoil/atom";
 import ButtonBookmark from "./widgets/button-bookmark";
 
 const SectionTitle = (props: { getNewsArticle: Function }) => {
   const [orderBy, setOrderBy] = useRecoilState(orderByState);
+  const navigate = useNavigate();
+
+  const onClickView = () => {
+    navigate("/bookmark");
+  };
 
   return (
     <div className="title">
       <h1>Top stories</h1>
       <div className="sectionTitle">
         <div>
-          <ButtonBookmark />
+          <ButtonBookmark onClick={onClickView} />
         </div>
         <div>
           <select

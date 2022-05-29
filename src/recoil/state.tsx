@@ -1,5 +1,5 @@
 import { selector } from "recoil";
-import { newsListState } from "./atom";
+import { bookmarkListState, contentState, newsListState } from "./atom";
 import { INews } from "./interfaces";
 
 const newsListSections = selector({
@@ -23,4 +23,17 @@ const newsListSections = selector({
   },
 });
 
-export { newsListSections };
+const findBookmarkList = selector({
+  key: "findBookmarkList",
+  get: ({ get }) => {
+    const bookmark = get(bookmarkListState);
+    const content = get(contentState);
+    const find: INews | undefined = bookmark.find(
+      (item) => item.id === content.id
+    );
+
+    return find;
+  },
+});
+
+export { newsListSections, findBookmarkList };

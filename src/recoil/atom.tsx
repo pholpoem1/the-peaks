@@ -36,6 +36,23 @@ const contentState = atom({
   default: {} as INews,
 });
 
+const bookmarkList = JSON.parse(localStorage.getItem("bookmarkList") || "[]");
+
+const bookmarkListState = atom({
+  key: "bookmarkListState",
+  default: bookmarkList as INews[],
+});
+
+const showToastRemove = atom({
+  key: "showToastRemove",
+  default: false,
+});
+
+const showToastAdd = atom({
+  key: "showToastAdd",
+  default: false,
+});
+
 export {
   newsListState,
   textState,
@@ -44,4 +61,7 @@ export {
   sportListState,
   bookmarkState,
   contentState,
+  bookmarkListState,
+  showToastRemove,
+  showToastAdd,
 };

@@ -1,11 +1,20 @@
 import axios from "axios";
 import React, { useCallback, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { public_const } from "src/api/constant";
 import Layout from "src/components/layout";
 import ButtonBookmark from "src/components/widgets/button-bookmark";
-import { contentState, loaderState } from "src/recoil/atom";
+import {
+  bookmarkListState,
+  bookmarkState,
+  contentState,
+  loaderState,
+  showToastAdd,
+  showToastRemove,
+} from "src/recoil/atom";
+import { INews } from "src/recoil/interfaces";
+import { findBookmarkList } from "src/recoil/state";
 
 const Content = () => {
   const location = useLocation();
@@ -13,6 +22,12 @@ const Content = () => {
   const id = new URLSearchParams(strLocation).get("id");
   const setIsOpen = useSetRecoilState(loaderState);
   const [content, setContent] = useRecoilState(contentState);
+  const setBookmarkStatus = useSetRecoilState(bookmarkState);
+  const [bookmarkList, setBookmarkList] = useRecoilState(bookmarkListState);
+  const setToastRemove = useSetRecoilState(showToastRemove);
+  const setToastAdd = useSetRecoilState(showToastAdd);
+
+  const findBooking = useRecoilValue(findBookmarkList);
 
   const getContent = useCallback(
     () => {
@@ -38,17 +53,35 @@ const Content = () => {
   );
 
   useEffect(() => {
+    setBookmarkStatus(false);
     getContent();
-  }, [getContent]);
+  }, [getContent, setBookmarkStatus]);
 
   const date_news = new Date(content.webPublicationDate).toUTCString();
+
+  const onChangeBookmark = (content: INews) => {
+    let _bookmarkList = bookmarkList;
+    if (findBooking) {
+      _bookmarkList = bookmarkList.filter((item) => item.id !== content.id);
+      setToastRemove(true);
+    } else {
+      _bookmarkList = [..._bookmarkList, content];
+      setToastAdd(true);
+    }
+    setBookmarkList(_bookmarkList);
+    localStorage.setItem("bookmarkList", JSON.stringify(_bookmarkList));
+    setTimeout(() => {
+      setToastRemove(false);
+      setToastAdd(false);
+    }, 3000);
+  };
 
   return (
     <Layout>
       <div className="col-content">
         <div className="title">
           <div>
-            <ButtonBookmark />
+            <ButtonBookmark onClick={() => onChangeBookmark(content)} />
             <span id="date-content">{date_news}</span>
           </div>
         </div>
