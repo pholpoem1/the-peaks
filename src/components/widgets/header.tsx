@@ -1,14 +1,13 @@
 import React from "react";
-
-const Logo = () => <img src="/assets/Logo_White.png" alt="logo" width={142} />;
+import Logo from "./logo";
+import SearchBox from "./search-box";
 
 const Header = () => {
   return (
     <header>
       <div className="toolbar">
-        <div id="logo">
-          <Logo />
-        </div>
+        <Logo />
+        <SearchBox />
       </div>
     </header>
   );

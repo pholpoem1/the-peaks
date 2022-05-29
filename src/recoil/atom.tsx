@@ -5,6 +5,11 @@ const newsListState = atom({
   default: [],
 });
 
+const sportListState = atom({
+  key: "sportListState",
+  default: [],
+});
+
 const textState = atom({
   key: "textState",
   default: "",
@@ -20,4 +25,16 @@ const loaderState = atom({
   default: false,
 });
 
-export { newsListState, textState, orderByState, loaderState };
+const bookmarkState = atom({
+  key: "bookmarkState",
+  default: true,
+});
+
+export {
+  newsListState,
+  textState,
+  orderByState,
+  loaderState,
+  sportListState,
+  bookmarkState,
+};

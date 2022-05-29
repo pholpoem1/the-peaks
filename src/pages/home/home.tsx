@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useCallback, useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import SectionNews from "src/components/section-news";
 import SectionTitle from "src/components/section-title";
 import Container from "src/components/widgets/container";
+import Footer from "src/components/widgets/footer";
 import Header from "src/components/widgets/header";
 import Loader from "src/components/widgets/loader";
 import { loaderState, newsListState, textState } from "src/recoil/atom";
@@ -20,7 +22,9 @@ const Home = () => {
 
   const getNewsArticle = useCallback(
     (orderBy: string | undefined) => {
-      let param = `api-key=${apiKey}`;
+      console.log("orderBy :>> ", orderBy);
+
+      let param = `api-key=${apiKey}&section=sport|culture|lifeandstyle&page-size=200`;
       if (orderBy) {
         param = `${param}&order-by=${orderBy}`;
       } else {
@@ -48,7 +52,8 @@ const Home = () => {
           console.log(error);
         });
     },
-    [query, setNewsList, setIsOpen]
+    // eslint-disable-next-line
+    [setNewsList, setIsOpen]
   );
 
   useEffect(() => {
@@ -64,8 +69,10 @@ const Home = () => {
           <Loader />
           <SectionTitle getNewsArticle={getNewsArticle} />
           <SectionTop />
+          <SectionNews />
         </>
       </Container>
+      <Footer />
     </>
   );
 };
