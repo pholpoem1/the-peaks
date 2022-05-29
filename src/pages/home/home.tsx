@@ -1,19 +1,12 @@
 import axios from "axios";
 import React, { useCallback, useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { public_const } from "src/api/constant";
+import Layout from "src/components/layout";
 import SectionNews from "src/components/section-news";
 import SectionTitle from "src/components/section-title";
-import Container from "src/components/widgets/container";
-import Footer from "src/components/widgets/footer";
-import Header from "src/components/widgets/header";
-import Loader from "src/components/widgets/loader";
 import { loaderState, newsListState, textState } from "src/recoil/atom";
-// import { INews } from "src/recoil/interfaces";
 import SectionTop from "../../components/section-top";
-
-const host = "https://content.guardianapis.com";
-const routeApi = "/search";
-const apiKey = "59451e21-6e9e-442f-85f0-2609bf05f484";
 
 const Home = () => {
   const setNewsList = useSetRecoilState(newsListState);
@@ -22,9 +15,7 @@ const Home = () => {
 
   const getNewsArticle = useCallback(
     (orderBy: string | undefined) => {
-      console.log("orderBy :>> ", orderBy);
-
-      let param = `api-key=${apiKey}&section=sport|culture|lifeandstyle&page-size=200`;
+      let param = `api-key=${public_const.apiKey}&section=sport|culture|lifeandstyle&page-size=200`;
       if (orderBy) {
         param = `${param}&order-by=${orderBy}`;
       } else {
@@ -33,11 +24,9 @@ const Home = () => {
       if (query) {
         param = `${param}&q=${query}`;
       }
-
       setIsOpen(true);
-
       axios
-        .get(`${host}${routeApi}?${param}`)
+        .get(`${public_const.host}${public_const.routeApi}?${param}`)
         .then((res: { data: any }) => {
           // handle success
           const { results } = res.data.response;
@@ -61,19 +50,11 @@ const Home = () => {
   }, [getNewsArticle]);
 
   return (
-    <>
-      <Header />
-      <div className="toolbar"></div>
-      <Container>
-        <>
-          <Loader />
-          <SectionTitle getNewsArticle={getNewsArticle} />
-          <SectionTop />
-          <SectionNews />
-        </>
-      </Container>
-      <Footer />
-    </>
+    <Layout>
+      <SectionTitle getNewsArticle={getNewsArticle} />
+      <SectionTop />
+      <SectionNews />
+    </Layout>
   );
 };
 

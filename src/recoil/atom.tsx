@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { INews } from "./interfaces";
 
 const newsListState = atom({
   key: "newsListState",
@@ -30,6 +31,11 @@ const bookmarkState = atom({
   default: true,
 });
 
+const contentState = atom({
+  key: "contentState",
+  default: {} as INews,
+});
+
 export {
   newsListState,
   textState,
@@ -37,4 +43,5 @@ export {
   loaderState,
   sportListState,
   bookmarkState,
+  contentState,
 };

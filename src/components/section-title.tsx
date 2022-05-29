@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import { orderByState } from "src/recoil/atom";
-import Bookmark from "./widgets/bookmark";
+import ButtonBookmark from "./widgets/button-bookmark";
 
 const SectionTitle = (props: { getNewsArticle: Function }) => {
   const [orderBy, setOrderBy] = useRecoilState(orderByState);
@@ -11,9 +11,7 @@ const SectionTitle = (props: { getNewsArticle: Function }) => {
       <h1>Top stories</h1>
       <div className="sectionTitle">
         <div>
-          <button id="button-bookmark">
-            <Bookmark /> View Bookmark
-          </button>
+          <ButtonBookmark />
         </div>
         <div>
           <select

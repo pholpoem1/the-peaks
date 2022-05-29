@@ -2,7 +2,7 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { bookmarkState } from "src/recoil/atom";
 
-const Bookmark = () => {
+const IconBookmark = () => {
   const bookmark = useRecoilValue(bookmarkState);
   return (
     <div id="bookmark">
@@ -15,4 +15,4 @@ const Bookmark = () => {
   );
 };
 
-export default Bookmark;
+export default IconBookmark;
